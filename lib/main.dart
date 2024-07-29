@@ -1,8 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:g_chat/theme_notifier.dart';
 import 'package:g_chat/views/onboard_view.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+
+  WidgetsFlutterBinding.ensureInitialized();
+  final bool isDark =
+  (await SharedPreferences.getInstance()).getBool('isDarkMode') ?? true;
+
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => ThemeNotifier(isDark: isDark),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -20,3 +33,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+
+

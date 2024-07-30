@@ -11,6 +11,7 @@ import 'package:g_chat/views/auth/sign_up_view.dart';
 import 'package:provider/provider.dart';
 
 class OnboardView extends StatelessWidget {
+  static const String routeName = "/onboard-view";
   const OnboardView({super.key});
 
   @override
@@ -54,23 +55,14 @@ class OnboardView extends StatelessWidget {
                   GlobalButton(
                     btnName: kGetStarted.toUpperCase(),
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const SignUpView()),
-                      );
+                      Navigator.pushNamed(context, SignUpView.routeName);
                     },
                   ),
                   AuthBottomAccountWidget(
                     textOne: kAlreadyHaveAccount,
                     textTwo: kLoginButton,
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const SignInView()),
-                      );
-                    },
+                    onTap: () =>
+                        Navigator.pushNamed(context, SignInView.routeName),
                   )
                 ],
               )

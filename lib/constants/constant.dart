@@ -12,3 +12,5 @@ const String kChatTab = "Chat"; // Label for the chat tab
 
 // The Logo for GChat App
 const String kGChatLogoPath = 'assets/svgs/g_chat_logo.svg'; // Path to the GChat logo asset
+
+

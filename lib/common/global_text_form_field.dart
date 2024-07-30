@@ -2,19 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:g_chat/constants/app_colors.dart';
 
 class GlobalTextFormField extends StatelessWidget {
-  const GlobalTextFormField({
-    required this.controller,
-    required this.hintText,
-    this.isPassword = false,
-    this.enabled = true,
-    this.focusNode,
-    this.prefixIcon,
-    this.suffixIcon,
-    this.maxLines = 1,
-    this.validator,
-    this.width,
-    super.key,
-  });
   final TextEditingController controller;
   final FocusNode? focusNode;
   final Widget? prefixIcon;
@@ -25,6 +12,22 @@ class GlobalTextFormField extends StatelessWidget {
   final int maxLines;
   final String? Function(String?)? validator;
   final double? width;
+  TextInputType? keyboardType;
+  GlobalTextFormField({
+    required this.controller,
+    required this.hintText,
+    this.isPassword = false,
+    this.enabled = true,
+    this.focusNode,
+    this.prefixIcon,
+    this.suffixIcon,
+    this.maxLines = 1,
+    this.validator,
+    this.width,
+    this.keyboardType,
+    super.key,
+  });
+
   @override
   Widget build(BuildContext context) {
     final w = MediaQuery.of(context).size.width;
@@ -34,10 +37,11 @@ class GlobalTextFormField extends StatelessWidget {
       controller: controller,
       focusNode: focusNode,
       obscureText: isPassword,
+      keyboardType: keyboardType,
       enabled: enabled,
       style: const TextStyle(
         fontFamily: 'Satoshi',
-        fontSize: 16,
+        fontSize: 14,
         fontWeight: FontWeight.w500,
         height: 1.6,
       ).copyWith(
@@ -80,7 +84,7 @@ class GlobalTextFormField extends StatelessWidget {
         hintText: hintText,
         errorStyle: const TextStyle(
           fontFamily: 'Satoshi',
-          fontSize: 16,
+          fontSize: 12,
           fontWeight: FontWeight.w400,
           height: 1.6,
         ).copyWith(

@@ -1,4 +1,4 @@
-package com.gchat.g_chat
+package com.gchat.app
 
 import io.flutter.embedding.android.FlutterActivity
 

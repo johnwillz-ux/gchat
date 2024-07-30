@@ -1,4 +1,7 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:g_chat/firebase_options.dart';
+import 'package:g_chat/services/firebase_services.dart';
 import 'package:g_chat/theme_notifier.dart';
 import 'package:g_chat/views/auth/onboard_view.dart';
 import 'package:provider/provider.dart';
@@ -6,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await initializeFirebase();
   final bool isDark =
       (await SharedPreferences.getInstance()).getBool('isDarkMode') ?? true;
 

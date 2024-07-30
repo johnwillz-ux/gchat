@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:g_chat/constants/app_colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ThemeNotifier extends ChangeNotifier {
@@ -11,8 +12,9 @@ class ThemeNotifier extends ChangeNotifier {
     primaryTextTheme: ThemeData.dark().primaryTextTheme.apply(
           fontFamily: 'Satoshi',
         ),
+    scaffoldBackgroundColor: Colors.black,
     colorScheme: ColorScheme.fromSeed(
-      seedColor: Colors.blue,
+      seedColor: Colors.orange,
       brightness: Brightness.dark,
     ),
   );
@@ -24,8 +26,9 @@ class ThemeNotifier extends ChangeNotifier {
     primaryTextTheme: ThemeData.light().primaryTextTheme.apply(
           fontFamily: 'Satoshi',
         ),
+    scaffoldBackgroundColor: AppColors.kBg2Color,
     colorScheme: ColorScheme.fromSeed(
-      seedColor: Colors.blue,
+      seedColor: Colors.orange,
       brightness: Brightness.light,
     ),
   );

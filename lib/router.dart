@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:g_chat/views/auth/onboard_view.dart';
 import 'package:g_chat/views/auth/sign_in_view.dart';
 import 'package:g_chat/views/auth/sign_up_view.dart';
+import 'package:g_chat/views/chat/conversation_view.dart';
 import 'package:g_chat/views/navbar/nav_bar.dart';
 
 /// Generates a route based on the provided [RouteSettings].
@@ -42,6 +43,21 @@ Route<dynamic> generateRoute(RouteSettings settings) {
 
       /// Returns a [MaterialPageRoute] that builds the [NavBar].
       return MaterialPageRoute(builder: (context) => const NavBar());
+
+    /// Returns a [MaterialPageRoute] that builds the [ConversationView].
+    case ConversationView.routeName:
+      final Map<String, dynamic> arguments =
+          settings.arguments as Map<String, dynamic>;
+
+      final String recipientFullName = arguments['recipientFullName'] as String;
+      final String recipientUserID = arguments['recipientUserID'] as String;
+
+      return MaterialPageRoute(
+        builder: (context) => ConversationView(
+          recipientFullName: recipientFullName,
+          recipientUserID: recipientUserID,
+        ),
+      );
 
     default:
 

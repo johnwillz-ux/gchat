@@ -33,7 +33,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:g_chat/constants/app_colors.dart';
-import 'package:g_chat/theme_notifier.dart';
+import 'package:g_chat/providers/theme_notifier.dart';
 import 'package:g_chat/views/chat/chat_view.dart';
 import 'package:g_chat/views/profile/profile_view.dart';
 import 'package:iconly/iconly.dart';

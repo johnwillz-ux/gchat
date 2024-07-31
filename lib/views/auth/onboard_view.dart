@@ -5,7 +5,7 @@ import 'package:g_chat/common/global_button.dart';
 import 'package:g_chat/constants/app_colors.dart';
 import 'package:g_chat/constants/app_text_styles.dart';
 import 'package:g_chat/constants/constant.dart';
-import 'package:g_chat/theme_notifier.dart';
+import 'package:g_chat/providers/theme_notifier.dart';
 import 'package:g_chat/views/auth/sign_in_view.dart';
 import 'package:g_chat/views/auth/sign_up_view.dart';
 import 'package:provider/provider.dart';

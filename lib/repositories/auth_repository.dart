@@ -149,15 +149,19 @@ class AuthRepository extends ChangeNotifier {
   Future<void> signOutUser(BuildContext context) async {
     try {
       await auth.signOut();
-      ShowNotificationSnack.showSuccess(context, "Logged Out",
-          "You can still access your account by logging in");
 
       // Clear local storage
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      await prefs.remove('userFullName');
-      await prefs.remove('userEmail');
+      await prefs.clear();
 
-      // Navigate to login or onboarding view
+      // Clear in-memory data
+      currentUser = null;
+      notifyListeners();
+
+      ShowNotificationSnack.showSuccess(context, "Logged Out",
+          "You can still access your account by logging in");
+
+      // Navigate to login or onboard view
       Navigator.pushNamedAndRemoveUntil(
           context, 'onboard-view', (route) => false);
     } catch (e) {

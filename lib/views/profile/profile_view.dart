@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:g_chat/common/utils.dart';
 import 'package:g_chat/repositories/auth_repository.dart';
-import 'package:g_chat/theme_notifier.dart';
+import 'package:g_chat/providers/theme_notifier.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
 import 'package:g_chat/constants/app_text_styles.dart';
 import 'package:g_chat/constants/constant.dart';
-
 
 class ProfileView extends StatelessWidget {
   static const String routeName = "/profile-view";
@@ -45,15 +45,17 @@ class ProfileView extends StatelessWidget {
               children: [
                 const SizedBox(height: 20),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                   decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                   ),
                   child: Row(
                     children: [
-                      const CircleAvatar(
-                        radius: 35,
+                      CircleAvatar(
+                        radius: 25,
+                        child: Text(getInitials(fullName), style: AppTextStyles.h3,),
                       ),
                       const SizedBox(width: 15),
                       Column(
@@ -74,7 +76,8 @@ class ProfileView extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                   decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.all(Radius.circular(10)),

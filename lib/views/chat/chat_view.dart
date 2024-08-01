@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:g_chat/common/utils.dart';
 import 'package:g_chat/constants/app_text_styles.dart';
+import 'package:g_chat/providers/theme_notifier.dart';
 import 'package:g_chat/providers/user_provider.dart';
 import 'package:g_chat/views/chat/conversation_view.dart';
 import 'package:provider/provider.dart';
@@ -12,6 +13,7 @@ class ChatView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
+    final themeData = Provider.of<ThemeNotifier>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -19,7 +21,7 @@ class ChatView extends StatelessWidget {
           "Chats",
           style: AppTextStyles.headingMedium,
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: themeData.getTheme() == themeData.lightTheme ? Colors.white : Colors.black,
       ),
       body: userProvider.isLoading
           ? const Center(child: CircularProgressIndicator())
@@ -36,7 +38,7 @@ class ChatView extends StatelessWidget {
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 5),
                     decoration: BoxDecoration(
-                        color: Colors.white,
+                        color:  themeData.getTheme() == themeData.lightTheme ? Colors.white : Colors.black,
                         borderRadius: BorderRadius.circular(10)),
                     child: ListTile(
                       leading: CircleAvatar(
@@ -45,13 +47,24 @@ class ChatView extends StatelessWidget {
                       ),
                       title: Text(user.fullName),
                       onTap: () {
+                        // Navigator.pushNamed(
+                        //   context,
+                        //   ConversationView.routeName,
+                        //   arguments: {
+                        //     'recipientFullName': user.fullName,
+                        //     'recipientUserID': user.uid,
+                        //   },
+                        // );
+
                         Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ConversationView(
-                                      recipientFullName: user.fullName,
-                                      recipientUserID: user.uid,
-                                    )));
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ConversationView(
+                              recipientFullName: user.fullName,
+                              recipientUserID: user.uid,
+                            ),
+                          ),
+                        );
                       },
                     ),
                   ),

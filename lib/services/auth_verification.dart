@@ -23,6 +23,7 @@ import 'package:g_chat/views/navbar/nav_bar.dart';
 /// ```
 ///
 class AuthVerification extends StatelessWidget {
+  static const String routeName = "/auth-verification";
   /// Creates an instance of [AuthVerification].
   const AuthVerification({super.key});
 

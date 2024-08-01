@@ -5,8 +5,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:g_chat/common/snak_bar_notification.dart';
 import 'package:g_chat/models/user_model.dart';
+import 'package:g_chat/providers/user_provider.dart';
 import 'package:g_chat/services/firebase_services.dart';
+import 'package:g_chat/views/auth/onboard_view.dart';
 import 'package:g_chat/views/navbar/nav_bar.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// This repository class handles authentication-related operations,
@@ -38,16 +41,7 @@ class AuthRepository extends ChangeNotifier {
   /// [email] - The email address of the user.
   /// [password] - The password for the user.
   /// [fullName] - The full name of the user.
-  ///
-  /// Example:
-  /// ```dart
-  /// await authRepository.signUpUser(
-  ///   context: context,
-  ///   email: 'user@example.com',
-  ///   password: 'password123',
-  ///   fullName: 'John Doe',
-  /// );
-  /// ```
+
   Future<void> signUpUser({
     required BuildContext context,
     required String email,
@@ -95,15 +89,7 @@ class AuthRepository extends ChangeNotifier {
   /// [context] - The build context to show notifications and navigate.
   /// [email] - The email address of the user.
   /// [password] - The password for the user.
-  ///
-  /// Example:
-  /// ```dart
-  /// await authRepository.signInUser(
-  ///   context: context,
-  ///   email: 'user@example.com',
-  ///   password: 'password123',
-  /// );
-  /// ```
+
   Future<void> signInUser({
     required BuildContext context,
     required String email,
@@ -139,31 +125,23 @@ class AuthRepository extends ChangeNotifier {
   }
 
   /// Signs out the current user and clears their data from local storage.
-  ///
-  /// [context] - The build context to show notifications and navigate.
-  ///
-  /// Example:
-  /// ```dart
-  /// await authRepository.signOutUser(context);
-  /// ```
-  Future<void> signOutUser(BuildContext context) async {
+
+  void signOutUser(BuildContext context) async {
     try {
       await auth.signOut();
 
-      // Clear local storage
+      /// Clear local storage and provider data
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      await prefs.clear();
+      await prefs.remove('fullName');
+      await prefs.remove('email');
 
-      // Clear in-memory data
-      currentUser = null;
-      notifyListeners();
+      /// Clear provider data
+      final userProvider = Provider.of<UserProvider>(context, listen: false);
+      userProvider.clearUsers();
 
-      ShowNotificationSnack.showSuccess(context, "Logged Out",
-          "You can still access your account by logging in");
-
-      // Navigate to login or onboard view
+      /// Navigate to login
       Navigator.pushNamedAndRemoveUntil(
-          context, 'onboard-view', (route) => false);
+          context, OnboardView.routeName, (route) => true);
     } catch (e) {
       ShowNotificationSnack.showError(context, "Error", e.toString());
     }

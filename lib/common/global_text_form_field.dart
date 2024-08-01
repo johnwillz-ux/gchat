@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:g_chat/constants/app_colors.dart';
 
+// ignore: must_be_immutable
 class GlobalTextFormField extends StatelessWidget {
   final TextEditingController controller;
   final FocusNode? focusNode;

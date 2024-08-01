@@ -16,7 +16,7 @@ class OnboardView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeData = Provider.of<ThemeNotifier>(context, listen: false);
+    final themeData = Provider.of<ThemeNotifier>(context);
     return Scaffold(
       backgroundColor: themeData.getTheme() == themeData.darkTheme
           ? Colors.black12
@@ -46,7 +46,9 @@ class OnboardView extends StatelessWidget {
                   Text(
                     kWelcomeMessage,
                     style: AppTextStyles.bodySmallFont.copyWith(
-                        fontWeight: FontWeight.w500, color: Colors.black54),
+                        fontWeight: FontWeight.w500, color: themeData.getTheme() == themeData.lightTheme
+                        ? Colors.black45
+                        : Colors.white54,),
                   ),
                 ],
               ),

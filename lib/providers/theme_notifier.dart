@@ -62,8 +62,10 @@ class ThemeNotifier extends ChangeNotifier {
         ),
     primaryTextTheme: ThemeData.dark().primaryTextTheme.apply(
           fontFamily: 'Satoshi',
+          bodyColor: Colors.white,
+          displayColor: Colors.white,
         ),
-    scaffoldBackgroundColor: Colors.black,
+    scaffoldBackgroundColor: AppColors.kDark,
     colorScheme: ColorScheme.fromSeed(
       seedColor: Colors.orange,
       brightness: Brightness.dark,

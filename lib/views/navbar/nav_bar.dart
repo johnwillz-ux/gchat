@@ -69,13 +69,17 @@ class _NavBarState extends State<NavBar> {
         body: destinationViews[selectedIndex],
         bottomNavigationBar: NavigationBar(
           selectedIndex: selectedIndex,
-          backgroundColor: Colors.white,
+          backgroundColor: themeData.getTheme() == themeData.lightTheme
+              ? Colors.white
+              : Colors.black,
           onDestinationSelected: (int index) {
             setState(() {
               selectedIndex = index;
             });
           },
-          indicatorColor: Colors.white,
+          indicatorColor: themeData.getTheme() == themeData.lightTheme
+              ? Colors.white
+              : Colors.black,
           destinations: const [
             NavigationDestination(
               tooltip: "Chat",

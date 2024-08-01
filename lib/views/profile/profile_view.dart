@@ -37,7 +37,9 @@ class ProfileView extends StatelessWidget {
               "Profile",
               style: AppTextStyles.headingMedium,
             ),
-            backgroundColor: Colors.white,
+            backgroundColor: themeData.getTheme() == themeData.lightTheme
+                ? Colors.white
+                : Colors.black,
           ),
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -47,15 +49,20 @@ class ProfileView extends StatelessWidget {
                 Container(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  decoration: BoxDecoration(
+                    color: themeData.getTheme() == themeData.lightTheme
+                        ? Colors.white
+                        : Colors.black,
+                    borderRadius: const BorderRadius.all(Radius.circular(10)),
                   ),
                   child: Row(
                     children: [
                       CircleAvatar(
                         radius: 25,
-                        child: Text(getInitials(fullName), style: AppTextStyles.h3,),
+                        child: Text(
+                          getInitials(fullName),
+                          style: AppTextStyles.h3,
+                        ),
                       ),
                       const SizedBox(width: 15),
                       Column(
@@ -78,9 +85,11 @@ class ProfileView extends StatelessWidget {
                 Container(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  decoration: BoxDecoration(
+                    color: themeData.getTheme() == themeData.lightTheme
+                        ? Colors.white
+                        : Colors.black,
+                    borderRadius: const BorderRadius.all(Radius.circular(10)),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

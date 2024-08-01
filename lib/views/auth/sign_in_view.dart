@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:g_chat/common/auth_bottom_widget.dart';
 import 'package:g_chat/common/global_button.dart';
 import 'package:g_chat/common/global_text_form_field.dart';
+import 'package:g_chat/constants/app_colors.dart';
 import 'package:g_chat/constants/app_text_styles.dart';
 import 'package:g_chat/constants/constant.dart';
 import 'package:g_chat/repositories/auth_repository.dart';
@@ -32,7 +33,9 @@ class SignInView extends StatelessWidget {
     }
 
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: AppColors.kBg2Color,
+      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: Form(

@@ -7,6 +7,7 @@ import 'package:g_chat/providers/user_provider.dart';
 import 'package:g_chat/repositories/auth_repository.dart';
 import 'package:g_chat/repositories/chat_repository.dart';
 import 'package:g_chat/router.dart';
+import 'package:g_chat/services/auth_verification.dart';
 import 'package:g_chat/services/firebase_services.dart';
 import 'package:g_chat/providers/theme_notifier.dart';
 import 'package:provider/provider.dart';
@@ -94,6 +95,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       onGenerateRoute: generateRoute,
       initialRoute: '/auth-verification',
+      home: const AuthVerification(),
     );
   }
 }

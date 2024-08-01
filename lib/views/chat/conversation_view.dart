@@ -93,9 +93,9 @@ class _ConversationViewState extends State<ConversationView> {
               stream:
                   chatProvider.getMessages(currentUser, widget.recipientUserID),
               builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
-                }
+                // if (snapshot.connectionState == ConnectionState.waiting) {
+                //   return const Center(child: CircularProgressIndicator());
+                // }
                 if (snapshot.hasError) {
                   return const Center(child: Text('Something went wrong'));
                 }
@@ -210,7 +210,6 @@ class _ConversationViewState extends State<ConversationView> {
                     message: _messageController.text,
                   );
                   _messageController.clear();
-                  FocusScope.of(context).unfocus();
                   _scrollToBottom();
                 },
               ),

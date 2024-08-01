@@ -50,6 +50,9 @@ Building the App
 For iOS:
 - flutter build ios
 
+For Web:
+- flutter build web
+
 ## Features
 - User Authentication (Sign Up, Sign In, Sign Out)
 - Real-time Chat

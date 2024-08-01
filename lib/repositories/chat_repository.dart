@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:g_chat/common/snak_bar_notification.dart';
 import 'package:g_chat/models/message_model.dart';
 import 'package:g_chat/models/user_model.dart';
 
@@ -28,14 +31,19 @@ class ChatRepository extends ChangeNotifier {
   /// final users = await chatRepository.fetchUsers('currentUserId');
   /// ```
   Future<List<UserModel>> fetchUsers(String currentUserUid) async {
-    var usersSnapshot = await fireStore.collection('users').get();
+    try {
+      var usersSnapshot = await fireStore.collection('users').get();
 
-    var userList = usersSnapshot.docs
-        .map((doc) => UserModel.fromMap(doc.data()))
-        .where((user) => user.uid != currentUserUid)
-        .toList();
+      var userList = usersSnapshot.docs
+          .map((doc) => UserModel.fromMap(doc.data()))
+          .where((user) => user.uid != currentUserUid)
+          .toList();
 
-    return userList;
+      return userList;
+    } catch (e) {
+      log(e.toString());
+      return [];
+    }
   }
 
   /// Sends a message to a recipient user.
@@ -66,18 +74,24 @@ class ChatRepository extends ChangeNotifier {
       timestamp: timestamp,
     );
 
-    List<String> ids = [currentUserId, recipientUserId];
+    try {
+      List<String> ids = [currentUserId, recipientUserId];
 
-    ids.sort();
-    String chatRoomId = ids.join("&");
+      ids.sort();
+      String chatRoomId = ids.join("&");
 
-    await fireStore
-        .collection("chat-rooms")
-        .doc(chatRoomId)
-        .collection("messages")
-        .add(
-          newMessage.toMap(),
-        );
+      await fireStore
+          .collection("chat-rooms")
+          .doc(chatRoomId)
+          .collection("messages")
+          .add(
+            newMessage.toMap(),
+          );
+
+      log('Message sent to $recipientUserId');
+    } catch (e) {
+      log(e.toString());
+    }
   }
 
   /// Retrieves a stream of messages between the current user and another user.
@@ -100,17 +114,23 @@ class ChatRepository extends ChangeNotifier {
     ids.sort();
     String chatRoomId = ids.join("&");
 
-    return fireStore
-        .collection("chat-rooms")
-        .doc(chatRoomId)
-        .collection("messages")
-        .orderBy("timestamp", descending: false)
-        .snapshots()
-        .map((snapshot) {
-      if (snapshot.docs.isEmpty) {}
-      return snapshot.docs.map((doc) {
-        return MessageModel.fromMap(doc.data());
-      }).toList();
-    });
+    try {
+      return fireStore
+          .collection("chat-rooms")
+          .doc(chatRoomId)
+          .collection("messages")
+          .orderBy("timestamp", descending: false)
+          .snapshots()
+          .map((snapshot) {
+        if (snapshot.docs.isEmpty) {}
+
+        return snapshot.docs.map((doc) {
+          return MessageModel.fromMap(doc.data());
+        }).toList();
+      });
+    } catch (e) {
+      log('Error fetching messages: $e');
+      return Stream.value([]);
+    }
   }
 }

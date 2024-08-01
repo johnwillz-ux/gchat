@@ -11,7 +11,7 @@ import 'package:iconly/iconly.dart';
 import 'package:provider/provider.dart';
 
 class SignInView extends StatelessWidget {
-  static const String routeName = "/sign-in";
+
   const SignInView({super.key});
 
   @override

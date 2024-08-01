@@ -15,8 +15,6 @@ import 'package:provider/provider.dart';
 /// This widget uses the [ChatProvider] to fetch and send messages.
 
 class ConversationView extends StatefulWidget {
-  /// The route name for this widget.
-  static const String routeName = "/conversation-view";
 
   /// The full name of the recipient.
   final String recipientFullName;

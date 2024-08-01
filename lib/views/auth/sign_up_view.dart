@@ -11,7 +11,7 @@ import 'package:iconly/iconly.dart';
 import 'package:provider/provider.dart';
 
 class SignUpView extends StatelessWidget {
-  static const String routeName = "/sign-up";
+
   const SignUpView({super.key});
 
   @override
@@ -19,7 +19,6 @@ class SignUpView extends StatelessWidget {
     final fullNameController = TextEditingController();
     final emailController = TextEditingController();
     final passwordController = TextEditingController();
-
 
     final authRepo = context.read<AuthRepository>();
     final signUpFormKey = GlobalKey<FormState>();
@@ -63,54 +62,64 @@ class SignUpView extends StatelessWidget {
                   const SizedBox(
                     height: 20,
                   ),
-                  GlobalTextFormField(
-                    controller: fullNameController,
-                    hintText: 'Full Name',
-                    suffixIcon: const Icon(IconlyLight.profile),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Enter your Full Name';
-                      } else if (value.length < 2) {
-                        return 'Full Name should be at least 2 characters long';
-                      }
-                      return null;
-                    },
+                  SizedBox(
+                    height: 400,
+                    child: ListView(
+                      children: [
+                        GlobalTextFormField(
+                          controller: fullNameController,
+                          hintText: 'Full Name',
+                          suffixIcon: const Icon(IconlyLight.profile),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Enter your Full Name';
+                            } else if (value.length < 2) {
+                              return 'Full Name should be at least 2 characters long';
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        GlobalTextFormField(
+                          controller: emailController,
+                          hintText: 'Email',
+                          keyboardType: TextInputType.emailAddress,
+                          suffixIcon: const Icon(IconlyLight.message),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Enter your email address';
+                            } else if (!RegExp(
+                                    r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                .hasMatch(value)) {
+                              return 'Enter a valid email address';
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        GlobalTextFormField(
+                            controller: passwordController,
+                            hintText: 'Password',
+                            isPassword: true,
+                            suffixIcon: const Icon(IconlyLight.password),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Create your Password';
+                              } else if (value.length < 8) {
+                                return 'Password should be more than 8 character';
+                              }
+                              return null;
+                            }),
+                        const SizedBox(
+                          height: 300,
+                        ),
+                      ],
+                    ),
                   ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  GlobalTextFormField(
-                    controller: emailController,
-                    hintText: 'Email',
-                    keyboardType: TextInputType.emailAddress,
-                    suffixIcon: const Icon(IconlyLight.message),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Enter your email address';
-                      } else if (!RegExp(
-                              r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                          .hasMatch(value)) {
-                        return 'Enter a valid email address';
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  GlobalTextFormField(
-                      controller: passwordController,
-                      hintText: 'Password',
-                      isPassword: true,
-                      suffixIcon: const Icon(IconlyLight.password),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Create your Password';
-                        } else if (value.length < 8) {
-                          return 'Password should be more than 8 character';
-                        }
-                        return null;
-                      }),
                 ],
               ),
               Column(

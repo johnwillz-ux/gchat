@@ -41,8 +41,7 @@ import 'package:provider/provider.dart';
 
 /// A navigation bar widget that handles routing between different views.
 class NavBar extends StatefulWidget {
-  /// The route name for this widget.
-  static const String routeName = "/nav-bar";
+
 
   const NavBar({super.key});
 

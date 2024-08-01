@@ -93,9 +93,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: themeData.getTheme(),
       debugShowCheckedModeBanner: false,
-      onGenerateRoute: generateRoute,
-      initialRoute: '/auth-verification',
-      home: const AuthVerification(),
+     home: const AuthVerification(),
     );
   }
 }

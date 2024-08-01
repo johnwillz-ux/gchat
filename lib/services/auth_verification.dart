@@ -8,22 +8,8 @@ import 'package:g_chat/views/navbar/nav_bar.dart';
 /// It uses a [StreamBuilder] to listen to changes in the authentication state
 /// and returns either a [NavBar] if the user is authenticated or an [OnboardView]
 /// if the user is not authenticated.
-///
-/// Example:
-///
-/// ```dart
-/// void main() {
-///   runApp(
-///     MaterialApp(
-///       title: 'G Chat',
-///       home: const AuthVerification(),
-///     ),
-///   );
-/// }
-/// ```
-///
+
 class AuthVerification extends StatelessWidget {
-  static const String routeName = "/auth-verification";
   /// Creates an instance of [AuthVerification].
   const AuthVerification({super.key});
 
@@ -38,10 +24,12 @@ class AuthVerification extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           }
+
           /// If the user is authenticated, returns a [NavBar].
           if (snapshot.hasData) {
             return const NavBar();
           }
+
           /// If the user is not authenticated, returns an [OnboardView].
           return const OnboardView();
         },
@@ -49,4 +37,3 @@ class AuthVerification extends StatelessWidget {
     );
   }
 }
-

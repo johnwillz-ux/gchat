@@ -8,7 +8,6 @@ import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class ChatView extends StatelessWidget {
-  static const String routeName = "/chat-view";
   const ChatView({super.key});
 
   @override

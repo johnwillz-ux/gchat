@@ -3,6 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:g_chat/common/snak_bar_notification.dart';
 import 'package:g_chat/models/user_model.dart';
 import 'package:g_chat/providers/user_provider.dart';
@@ -73,7 +74,10 @@ class AuthRepository extends ChangeNotifier {
 
       notifyListeners();
 
-      Navigator.pushNamed(context, NavBar.routeName);
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const NavBar()),
+      );
     } on FirebaseAuthException catch (e) {
       String errorMessage = getMessageFromErrorCode(e.code);
       ShowNotificationSnack.showError(context, "Error", errorMessage);
@@ -113,7 +117,10 @@ class AuthRepository extends ChangeNotifier {
       await prefs.setString('userFullName', user.fullName);
       await prefs.setString('userEmail', user.email);
 
-      Navigator.pushNamed(context, NavBar.routeName);
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const NavBar()),
+      );
     } on FirebaseAuthException catch (e) {
       String errorMessage = getMessageFromErrorCode(e.code);
       ShowNotificationSnack.showError(context, "Error", errorMessage);
@@ -140,8 +147,10 @@ class AuthRepository extends ChangeNotifier {
       userProvider.clearUsers();
 
       /// Navigate to login
-      Navigator.pushNamedAndRemoveUntil(
-          context, OnboardView.routeName, (route) => true);
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => const OnboardView()),
+        (route) => false,
+      );
     } catch (e) {
       ShowNotificationSnack.showError(context, "Error", e.toString());
     }
